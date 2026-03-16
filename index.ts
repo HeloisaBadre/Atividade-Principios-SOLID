@@ -59,3 +59,13 @@ class Estagiario implements Funcionario, Dev {
         console.log("Estagiário escrevendo código.")
     }
 }
+
+class Freelancer implements trabalhar, escreverCodigo {
+    trabalhar(): void {
+        console.log("Freelancer trabalhando.")
+    }
+    escreverCodigo(): void {
+        console.log("Freelancer escrevendo código.")
+    }
+}
+
