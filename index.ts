@@ -1,18 +1,39 @@
-interface Funcionario {
+interface IFuncionario {
     trabalhar(): void;
     registrarPonto(): void;
     receberSalario(): void;
 }
 
-interface Gerencia {
+interface IGerencia {
     gerenciarEvento(): void;
 }
 
-interface Dev {
+interface IDev {
     escreverCodigo(): void
 }
 
-class Gerente implements Funcionario, Gerencia {
+interface IFreelancer {
+    escreverCodigo(): void
+}
+
+class SistemaRH {
+    private funcionario: IFuncionario;
+
+    constructor(funcionario: IFuncionario) {
+        this.funcionario = funcionario;
+    }
+
+    iniciarTrabalho(): void {
+        this.funcionario.trabalhar();
+        this.funcionario.registrarPonto();
+    }
+
+    pagarFuncionario(): void {
+        this.funcionario.receberSalario();
+    }
+}
+
+class Gerente implements IFuncionario, IGerencia {
     trabalhar(): void {
         console.log("Gerente trabalhando.")
     }
@@ -27,7 +48,7 @@ class Gerente implements Funcionario, Gerencia {
     }
 }
 
-class Desenvolvedor implements Funcionario, Dev {
+class Desenvolvedor implements IFuncionario, IDev {
     trabalhar(): void {
         console.log("Desenvolvedor trabalhando.")
     }
@@ -42,7 +63,7 @@ class Desenvolvedor implements Funcionario, Dev {
     }
 }
 
-class Estagiario implements Funcionario, Dev {
+class Estagiario implements IFuncionario, IDev {
     trabalhar(): void {
         console.log("Estagiário trabalhando.")
     }
@@ -60,12 +81,13 @@ class Estagiario implements Funcionario, Dev {
     }
 }
 
-class Freelancer implements trabalhar, escreverCodigo {
-    trabalhar(): void {
-        console.log("Freelancer trabalhando.")
-    }
+class Freelancer implements IFreelancer {
     escreverCodigo(): void {
         console.log("Freelancer escrevendo código.")
     }
 }
 
+const sistema1 = new SistemaRH(new Gerente());
+const sistema2 = new SistemaRH(new Desenvolvedor());
+const sistema3 = new SistemaRH(new Estagiario());
+const sistema4 = new SistemaRH(new Freelancer());
